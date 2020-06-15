@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: http-sneak
+  labels:
+    app: http-sneak
+spec:
+  containers:
+    - name: http-sneak
+      image: rulox/http-sneak
+      ports:
+        - name: http
+          containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: http-sneak-svc
+spec:
+  selector:
+    app: http-sneak
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
